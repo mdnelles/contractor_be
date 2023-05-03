@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+   node-server:
+      #build: .
+      build:
+         context: .
+         dockerfile: Dockerfile
+      container_name: node-api
+      expose: ["3306"]
+      command: npm run start
+      volumes:
+         - .:/src/app
+         - /src/app/node_modules
+         # /path-to-node_modules/app/node_modules (above)
+      ports:
+         - "5020:5020"
