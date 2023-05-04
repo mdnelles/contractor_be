@@ -5,11 +5,6 @@ import { db } from '../database/db';
 const env = require('dotenv').config().parsed;
 
 
-// "firstName": "M",
-// "fullName": "Micha",
-// "lastName": "Nel",
-// "photoUrl": "https://lh3.googleuserc",
-
 
 import { UserType } from '../types';
 

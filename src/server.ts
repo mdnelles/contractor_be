@@ -32,7 +32,8 @@ app.post('/user_edit', verifyTokenAdmin, users.edit);
 app.post('/user_remove', verifyTokenAdmin, users.remove);
 app.post('/user_list', verifyTokenAdmin, users.list);
 
-app.post('/doc_add', verifyTokenAdmin, mdb.addDoc);
+//app.post('/doc_add', verifyTokenAdmin, mdb.addDoc);
+app.post('/doc_add',  mdb.addDoc);
 app.post('/doc_get_all', verifyTokenAdmin, mdb.getAllDocs);
 app.post('/doc_get_by_attribute', verifyTokenAdmin, mdb.getDocsByAttribute);
 app.post('/doc_edit', verifyTokenAdmin, mdb.editDoc);

@@ -4,10 +4,11 @@ import { db } from '../database/db';
 
 // build and endpoint to addDoc to mongo
 export const addDoc = async (req: any, res: any): Promise<any> => {
-    const {collection, doc} = req.body;
+
     try {
-        const data: any = await db.collection(collection).insertOne(doc);
-        res.json({ status: 200, err: false, msg: 'doc added', data });
+        const {collection,doc} = req.body;
+        const resp: any = await db.collection(collection).insertOne(doc);
+        res.json({ status: 200, err: false, msg: 'doc added', resp });
     } catch (error) {
         res.json({ status: 200, err: true, error });
         console.log(error);

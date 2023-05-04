@@ -12,7 +12,8 @@
       "client-install": "npm install --prefix client",
       "start": "cp ./env/env-dev ./.env && ts-node ./src/server.ts",
       "dockerize": "cp ./env/env-docker ./.env && ts-node ./src/server.ts ",
-      "server": "cp ./env/env-dev ./.env && nodemon ./src/server.ts --ignore client ",
+      "server": "nodemon ./src/server.ts --ignore client ",
+      "server2": "cp ./env/env-dev ./.env && nodemon ./src/server.ts --ignore client ",
       "format": "prettier --write **/*.ts",
       "format-check": "prettier --check **/*.ts",
       "test": "jest --coverage",
@@ -31,6 +32,7 @@
    "dependencies": {
       "@actions/github": "^5.1.1",
       "@types/express": "^4.17.17",
+      "@types/mongodb": "^4.0.7",
       "bcrypt": "^5.1.0",
       "body-parser": "^1.20.2",
       "cors": "*",
