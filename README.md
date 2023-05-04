@@ -1,4 +1,4 @@
-# NodeJS Employees Back End
+# NodeJS Mongo JWT backend for contractor app
 
 This is a back end application that comminicates directly with the database for authentication and data retrieval.
 
@@ -8,7 +8,7 @@ This is a back end application that comminicates directly with the database for 
 -  Typescript
 -  Express web server
 -  Tokenized session with JWT
--  MySql DataBase
+-  Mongo DataBase
 
 ## Dockerize
 
@@ -82,8 +82,8 @@ To spin up mysql container `docker compose -f mysql.yml up`.
 
 # pm2 runtime config
 
-> `pm2 start ts-node ./src/server.ts --watch --name emp-server`
+> `pm2 start ts-node ./src/server.ts --watch --name contractor-server`
 
 OR
 
-> `pm2 start ./src/server.ts --watch --name emp-server --interpreter /root/.nvm/versions/node/v16.16.0/bin/ts-node`
+> `pm2 start ./src/server.ts --watch --name contractor-server --interpreter /root/.nvm/versions/node/v16.16.0/bin/ts-node`
