@@ -14,7 +14,7 @@ import * as mdb from "./routes/MongoRoutes";
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const app = express();
 const jsonParser = bodyParser.json();
-const port =  5027;
+  const port =  5027;
 
 app.use(cors());
 app.use(bodyParser.json());
