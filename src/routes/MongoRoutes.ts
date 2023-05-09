@@ -48,7 +48,7 @@ export const getDocsByAttribute = async (req: any, res: any): Promise<any> => {
 export const getDocsByObjMatch = async (req: any, res: any): Promise<any> => {
    const { collection, obj } = req.body;
    try {
-      // ie db.customers.find({"VIP": true,"Country": "Germany"})
+      // ie db.customers.find({"VIP": true,"Country": "Germany"});
       const arr: any = await db.collection(collection).find(obj).toArray();
 
       res.json({
