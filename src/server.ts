@@ -3,10 +3,9 @@ import compression from "compression";
 import bodyParser from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
-const env = require('dotenv').config().parsed;
+const env = require("dotenv").config().parsed;
 
-
-import { verifyTokenAdmin } from './routes/Token';
+import { verifyTokenAdmin } from "./routes/Token";
 import * as mail from "./routes/Mail";
 import * as users from "./routes/UserRoutes";
 import * as mdb from "./routes/MongoRoutes";
@@ -14,7 +13,7 @@ import * as mdb from "./routes/MongoRoutes";
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const app = express();
 const jsonParser = bodyParser.json();
-  const port =  5027;
+const port = 5027;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -26,18 +25,19 @@ app.use(jsonParser);
 app.use(urlencodedParser);
 app.use(helmet());
 
-app.post('/user_register', users.register);
-app.post('/user_login', users.login);
-app.post('/user_edit', verifyTokenAdmin, users.edit);
-app.post('/user_remove', verifyTokenAdmin, users.remove);
-app.post('/user_list', verifyTokenAdmin, users.list);
+app.post("/user_register", users.register);
+app.post("/user_login", users.login);
+app.post("/user_edit", verifyTokenAdmin, users.edit);
+app.post("/user_remove", verifyTokenAdmin, users.remove);
+app.post("/user_list", verifyTokenAdmin, users.list);
 
 //app.post('/doc_add', verifyTokenAdmin, mdb.addDoc);
-app.post('/doc_add',  mdb.addDoc);
-app.post('/doc_get_all', verifyTokenAdmin, mdb.getAllDocs);
-app.post('/doc_get_by_attribute', verifyTokenAdmin, mdb.getDocsByAttribute);
-app.post('/doc_edit', verifyTokenAdmin, mdb.editDoc);
-app.post('/doc_delete', verifyTokenAdmin, mdb.deleteDoc);
+app.post("/doc_add", mdb.addDoc);
+app.post("/doc_get_all", verifyTokenAdmin, mdb.getAllDocs);
+app.post("/doc_get_by_attribute", verifyTokenAdmin, mdb.getDocsByAttribute);
+app.post("/doc_get_by_obj_match", verifyTokenAdmin, mdb.getDocsByObjMatch);
+app.post("/doc_edit", verifyTokenAdmin, mdb.editDoc);
+app.post("/doc_delete", verifyTokenAdmin, mdb.deleteDoc);
 
 app.post("/mail_form", mail.mail_form);
 
