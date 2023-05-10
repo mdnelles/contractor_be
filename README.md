@@ -61,12 +61,6 @@ The first directive in the web service is to build the image based on our Docker
 
 -  ports: - This will publish the container's port, in this case 5020, to the host as port 5020.
 
-## Note about MySQL
-
-In order for MySQL to be reachable by NodeJS app the host must be different from the test environment. `host.docker.internal` so the following was put in to the db.ts file.
-
-> `const host = !!isDocker() ? "host.docker.internal" : env.NODE_DB_HOST;`
-
 ## Manage multi-container setups with Docker Compose
 
 Compose is a tool for defining and running multi-container Docker applications. With Compose, you define the services that need to run in a YAML file. Then bring up the services by using the docker-compose command.

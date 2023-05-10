@@ -35,7 +35,7 @@ app.post("/user_list", verifyTokenAdmin, users.list);
 app.post("/doc_add", mdb.addDoc);
 app.post("/doc_get_all", verifyTokenAdmin, mdb.getAllDocs);
 app.post("/doc_get_by_attribute", verifyTokenAdmin, mdb.getDocsByAttribute);
-app.post("/doc_get_by_obj_match", verifyTokenAdmin, mdb.getDocsByObjMatch);
+app.post("/doc_get_by_obj_match", mdb.getDocsByObjMatch);
 app.post("/doc_edit", verifyTokenAdmin, mdb.editDoc);
 app.post("/doc_delete", verifyTokenAdmin, mdb.deleteDoc);
 
