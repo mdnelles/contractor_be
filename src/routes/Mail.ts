@@ -3,9 +3,6 @@ import * as dotenv from "dotenv";
 
 export const mail_form = async (req: any, res: any): Promise<any> => {
    const { NODE_EMAIL_DEFAULT_REC } = dotenv.config().parsed;
-   console.log("--------req.body----");
-   console.log(req.body);
-   console.log(req.headers);
 
    const { subject = "mailfor", message = "default message" } = req.body;
    try {

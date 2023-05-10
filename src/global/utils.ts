@@ -5,7 +5,6 @@ interface NestedObject {
 export function findDataArray(obj: NestedObject): any[] | null {
    // check to see if obj is am array and if it is return it
    try {
-      console.log(obj);
       if (Array.isArray(obj) && obj.hasOwnProperty("data")) {
          return (obj as unknown as { data: any[] }).data; // type assertion
       }
