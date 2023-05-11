@@ -29,6 +29,7 @@ export const getAllDocs = async (req: any, res: any): Promise<any> => {
 // build endpoint to get docs from mongo db where attribute matches value
 export const getDocsByAttribute = async (req: any, res: any): Promise<any> => {
    const { collection, attribute, value } = req.body;
+   console.log(collection, attribute, value);
    try {
       const arr: any = await db
          .collection(collection)
@@ -88,6 +89,26 @@ export const updateDocById = async (req: any, res: any): Promise<any> => {
       res.json({ status: 200, err: false, msg: "doc edited", arr });
    } catch (error) {
       res.json({ status: 200, err: true, error });
+      console.log(error);
+   }
+};
+
+export const updateManyDocs = async (req: any, res: any): Promise<any> => {
+   try {
+      const {
+         collection,
+         compareFieldName,
+         compareFieldValue,
+         fieldToUpdate,
+         updatedValue,
+      } = req.body;
+      const query = { [compareFieldName]: compareFieldValue };
+      const update = { $set: { [fieldToUpdate]: updatedValue } };
+
+      const result = await db.collection(collection).updateMany(query, update);
+      res.json({ status: 200, err: false, msg: "Docs updated", result });
+   } catch (error) {
+      res.json({ status: 500, err: true, error: error.message });
       console.log(error);
    }
 };
