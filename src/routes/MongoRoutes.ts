@@ -1,5 +1,7 @@
 import { db } from "../database/db";
 
+const { ObjectId } = require("mongodb");
+
 // build and endpoint to addDoc to mongo
 export const addDoc = async (req: any, res: any): Promise<any> => {
    try {
@@ -62,12 +64,27 @@ export const getDocsByObjMatch = async (req: any, res: any): Promise<any> => {
    }
 };
 
-export const editDoc = async (req: any, res: any): Promise<any> => {
+export const updateDocObject = async (req: any, res: any): Promise<any> => {
    const { collection, doc } = req.body;
    try {
       const arr: any = await db
          .collection(collection)
          .updateOne(doc, { $set: doc });
+      res.json({ status: 200, err: false, msg: "doc edited", arr });
+   } catch (error) {
+      res.json({ status: 200, err: true, error });
+      console.log(error);
+   }
+};
+
+export const updateDocById = async (req: any, res: any): Promise<any> => {
+   const { collection, changeObj, _id } = req.body;
+   try {
+      const arr: any = await db.collection(collection).updateOne(
+         { _id: new ObjectId(_id) }, // Filter
+         { $set: changeObj }, // changeObj = {name: "John", address: "Highway 71"}
+         { upsert: true } // add document with req.body._id if not exists);
+      );
       res.json({ status: 200, err: false, msg: "doc edited", arr });
    } catch (error) {
       res.json({ status: 200, err: true, error });
