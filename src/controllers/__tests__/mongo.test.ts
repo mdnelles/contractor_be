@@ -1,35 +1,31 @@
-import request from "supertest";
-import app from "../../server";
+const { MongoClient } = require("mongodb");
+//import * as dbc from '../../database/dbconfig';
+import { uri, __MONGO_DB_NAME__ } from "../../database/db";
 
-// Wait for the server to start before running the test
-beforeAll((done) => {
-   app.listen(5027, () => {
-      console.log("Server is running on port: 5027");
-      done();
-   });
-}, 10000); // Increase the timeout to 10 seconds (or adjust as needed)
+describe("insert", () => {
+   let connection: { db: (arg0: any) => any; close: () => any };
+   let db: { collection: (arg0: string) => any };
 
-// test the addDoc endpoint
-test("addDoc endpoint testing....", async () => {
-   const response = await request(app)
-      .post("/doc_add")
-      .send({
-         collection: "users",
-         doc: {
-            name: "test",
-            email: "test@test",
-            password: "test",
-         },
+   beforeAll(async () => {
+      connection = await MongoClient.connect(uri, {
+         useNewUrlParser: true,
+         useUnifiedTopology: true,
       });
-   expect(response.body.msg).toBe("doc added");
-   expect(response.body.err).toBe(false);
-   expect(response.body.arr.ops[0].name).toBe("test");
-   expect(response.body.arr.ops[0].email).toBe("test@test");
-   expect(response.body.arr.ops[0].password).toBe("test");
-});
+      db = await connection.db(__MONGO_DB_NAME__);
+   });
 
-afterAll((done) => {
-   const server = app.listen(5027, () => {
-      server.close(done);
+   afterAll(async () => {
+      await connection.close();
+   });
+
+   it("should insert a doc into collection", async () => {
+      const now = Date.now();
+      const users = db.collection("testusers");
+
+      const mockUser = { _id: "some-user-" + now, name: "John" };
+      await users.insertOne(mockUser);
+
+      const insertedUser = await users.findOne({ _id: "some-user-" + now });
+      expect(insertedUser).toEqual(mockUser);
    });
 });

@@ -8,7 +8,7 @@ type msgType = {
 };
 
 export default function extMailer(params: msgType) {
-   return new Promise(async (resolve) => {
+   return new Promise((resolve) => {
       const {
          NODE_MAIL_HOST,
          NODE_MAIL_EMAIL,
@@ -36,18 +36,18 @@ export default function extMailer(params: msgType) {
             },
             logger: true,
          });
-
-         const info = await transporter.sendMail({
-            from: NODE_EMAIL_SENDER,
-            to,
-            subject,
-            text: message,
-            html: message,
-            headers: { "x-myheader": "test header" },
-         });
-
-         console.log("Message sent: %s", info.response);
-         resolve(true);
+         (async () => {
+            const info = await transporter.sendMail({
+               from: NODE_EMAIL_SENDER,
+               to,
+               subject,
+               text: message,
+               html: message,
+               headers: { "x-myheader": "test header" },
+            });
+            console.log("Message sent: %s", info.response);
+            resolve(true);
+         })();
       } catch (error) {
          resolve(false);
       }

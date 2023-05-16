@@ -1,6 +1,6 @@
 import { db } from "../database/db";
 
-const { ObjectId } = require("mongodb");
+import { ObjectId } from "mongodb";
 
 // build and endpoint to addDoc to mongo
 export const addDoc = async (req: any, res: any): Promise<any> => {
