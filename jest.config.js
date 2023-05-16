@@ -16,7 +16,7 @@ module.exports = {
          statements: 90,
       },
    },
-   preset: "ts-jest",
+   preset: "@shelf/jest-mongodb", // Add both presets in an array
    moduleNameMapper: {
       "^src/(.*)$": "<rootDir>/src/$1",
    },

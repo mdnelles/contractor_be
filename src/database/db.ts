@@ -15,6 +15,7 @@ const client = new MongoClient(uri, {
 // { useNewUrlParser: true }, { connectTimeoutMS: 30000 }, { keepAlive: 1});
 
 export const db = client.db("dpc");
+export const __MONGO_DB_NAME__ = "dpc";
 
 // export const client = new MongoClient(uri, {
 //   useNewUrlParser: true,

@@ -9,6 +9,7 @@ import { verifyTokenAdmin } from "./routes/Token";
 import * as mail from "./routes/Mail";
 import * as users from "./routes/UserRoutes";
 import * as mdb from "./routes/MongoRoutes";
+import * as test from "./routes/Tester";
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const app = express();
@@ -40,6 +41,9 @@ app.post("/doc_edit_by_id", verifyTokenAdmin, mdb.updateDocById);
 app.post("/doc_edit_many", mdb.updateManyDocs);
 app.post("/doc_delete", verifyTokenAdmin, mdb.deleteDoc);
 
+app.all("/sum", test.sum);
+app.all("/count_string", test.countStringOccurrances);
+
 app.post("/mail_form", mail.mail_form);
 
 if (env.NODE_ENV === "production") {
@@ -47,7 +51,7 @@ if (env.NODE_ENV === "production") {
 }
 
 app.listen(port, function () {
-   console.log("Server is running on port: " + port);
+   //console.log("Server is running on port: " + port);
 });
 
 export default app;

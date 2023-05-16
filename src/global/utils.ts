@@ -3,31 +3,32 @@ interface NestedObject {
 }
 
 export function findDataArray(obj: NestedObject): any[] | null {
-   // check to see if obj is am array and if it is return it
    try {
-      if (Array.isArray(obj) && obj.hasOwnProperty("data")) {
-         return (obj as unknown as { data: any[] }).data; // type assertion
+      if (
+         Array.isArray(obj) &&
+         Object.prototype.hasOwnProperty.call(obj, "data")
+      ) {
+         return (obj as unknown as { data: any[] }).data;
       }
 
-      // Check if obj is an object with a "data" property
       if (
          typeof obj === "object" &&
          obj !== null &&
-         obj.hasOwnProperty("data")
+         Object.prototype.hasOwnProperty.call(obj, "data")
       ) {
          return obj.data;
       }
-      for (let prop in obj) {
-         if (obj.hasOwnProperty(prop)) {
+
+      for (const prop in obj) {
+         if (Object.prototype.hasOwnProperty.call(obj, prop)) {
             const nestedObj = obj[prop];
-            const dataArr = findDataArray(nestedObj); // recursively search nested objects and arrays
+            const dataArr = findDataArray(nestedObj);
             if (dataArr) {
                return dataArr;
             }
          }
       }
 
-      // If "data" array was not found, return null
       return null;
    } catch (error) {
       console.log(error);
