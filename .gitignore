@@ -9,4 +9,4 @@ build
 tmp
 *tmp.ts
 dbconfig.ts
-coverage
+*coverage*
