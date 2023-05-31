@@ -18,18 +18,18 @@ describe("Endpoint Tests", () => {
          });
       });
 
-      //   it("should return an error message when non-number inputs are provided", async () => {
-      //      const response = await request(app)
-      //         .post("/sum")
-      //         .send({ num1: "5", num2: 10 })
-      //         .expect(200);
+      it("should return an error message when non-number inputs are provided", async () => {
+         const response = await request(app)
+            .post("/sum")
+            .send({ num1: "a", num2: 10 })
+            .expect(200);
 
-      //      expect(response.body).toEqual({
-      //         status: 200,
-      //         err: true,
-      //         msg: "you must supply two numbers",
-      //      });
-      //   });
+         expect(response.body).toEqual({
+            status: 200,
+            err: true,
+            msg: "you must supply two numbers",
+         });
+      });
    });
 
    //    describe("POST /count_string", () => {
