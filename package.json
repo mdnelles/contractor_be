@@ -17,6 +17,7 @@
       "format": "prettier --write **/*.ts",
       "format-check": "prettier --check **/*.ts",
       "test": "jest --coverage",
+      "test2": "jest --detectOpenHandles",
       "pre-checkin": "npm run format && npm run build && npm test",
       "lint": "eslint src/**/*.ts"
    },
