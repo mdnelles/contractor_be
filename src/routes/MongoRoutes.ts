@@ -8,7 +8,7 @@ export const addDoc = async (req: any, res: any): Promise<any> => {
       const { collection, doc } = req.body;
       const arr: any = await db.collection(collection).insertOne(doc);
       res.json({ status: 200, err: false, msg: "doc added", arr });
-   } catch (error) {
+   } catch (error: any) {
       res.json({ status: 200, err: true, error });
       console.log(error);
    }
@@ -20,7 +20,7 @@ export const getAllDocs = async (req: any, res: any): Promise<any> => {
    try {
       const arr: any = await db.collection(collection).find({}).toArray();
       res.json({ status: 200, err: false, msg: "docs found", arr });
-   } catch (error) {
+   } catch (error: any) {
       res.json({ status: 200, err: true, error });
       console.log(error);
    }
@@ -42,7 +42,7 @@ export const getDocsByAttribute = async (req: any, res: any): Promise<any> => {
          msg: "doc(s) found",
          arr,
       });
-   } catch (error) {
+   } catch (error: any) {
       res.json({ status: 200, err: true, error });
       console.log(error);
    }
@@ -59,7 +59,7 @@ export const getDocsByObjMatch = async (req: any, res: any): Promise<any> => {
          msg: "doc(s) found",
          arr,
       });
-   } catch (error) {
+   } catch (error: any) {
       res.json({ status: 200, err: true, error });
       console.log(error);
    }
@@ -72,7 +72,7 @@ export const updateDocObject = async (req: any, res: any): Promise<any> => {
          .collection(collection)
          .updateOne(doc, { $set: doc });
       res.json({ status: 200, err: false, msg: "doc edited", arr });
-   } catch (error) {
+   } catch (error: any) {
       res.json({ status: 200, err: true, error });
       console.log(error);
    }
@@ -87,7 +87,7 @@ export const updateDocById = async (req: any, res: any): Promise<any> => {
          { upsert: true } // add document with req.body._id if not exists);
       );
       res.json({ status: 200, err: false, msg: "doc edited", arr });
-   } catch (error) {
+   } catch (error: any) {
       res.json({ status: 200, err: true, error });
       console.log(error);
    }
@@ -107,7 +107,7 @@ export const updateManyDocs = async (req: any, res: any): Promise<any> => {
 
       const result = await db.collection(collection).updateMany(query, update);
       res.json({ status: 200, err: false, msg: "Docs updated", result });
-   } catch (error) {
+   } catch (error: any) {
       res.json({ status: 500, err: true, error: error.message });
       console.log(error);
    }
@@ -119,7 +119,7 @@ export const deleteDoc = async (req: any, res: any): Promise<any> => {
    try {
       const arr: any = await db.collection(collection).deleteOne(doc);
       res.json({ status: 200, err: false, msg: "doc deleted", arr });
-   } catch (error) {
+   } catch (error: any) {
       res.json({ status: 200, err: true, error });
       console.log(error);
    }

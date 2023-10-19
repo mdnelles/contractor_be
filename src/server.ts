@@ -6,7 +6,7 @@ import helmet from "helmet";
 const env = require("dotenv").config().parsed;
 
 import { verifyTokenAdmin } from "./routes/Token";
-import * as mail from "./routes/Mail";
+// import * as mail from "./routes/Mail";
 import * as users from "./routes/UserRoutes";
 import * as mdb from "./routes/MongoRoutes";
 import * as test from "./routes/Tester";
@@ -44,7 +44,7 @@ app.post("/doc_delete", verifyTokenAdmin, mdb.deleteDoc);
 app.all("/sum", test.sum);
 app.all("/count_string", test.countStringOccurrances);
 
-app.post("/mail_form", mail.mail_form);
+// app.post("/mail_form", mail.mail_form);
 
 if (env.NODE_ENV === "production") {
    app.use(express.static("client/build"));
